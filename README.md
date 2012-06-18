@@ -1,4 +1,5 @@
 # Strap: A nice starting theme
+A sub theme of contrib theme twitter_bootstrap. No settings, no nothing. 
 
 ## Get started
 
@@ -16,7 +17,7 @@
 
 ## Style test
 1. Make a basic page in Drupal using Full HTML, and paste the content of samples/bootstrap-html.txt
-2. Repeat with samples/drupal-html.txt
+2. Repeat with drupal-html.txt + jqueryui-html.txt
 
 ## Todos
 - Remove instructions on filters: http://cl.ly/0H3W26401T3A1c3y2j0k
