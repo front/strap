@@ -5,7 +5,7 @@ core = 7.x
 base theme = twitter_bootstrap
 
 ; Styles
-styles[styles/style.css][options][media] = all
+stylesheets[all][] = styles/style.css
 
 ; exclude[js][] = 'misc/jquery.js'
 ; scripts[] = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
