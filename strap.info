@@ -1,0 +1,11 @@
+name = Strap
+description = Bootstrap-friendly sub-theme.
+screenshot = images/screenshot.jpeg
+core = 7.x
+base theme = twitter_bootstrap
+
+; Styles
+styles[styles/style.css][options][media] = all
+
+; exclude[js][] = 'misc/jquery.js'
+; scripts[] = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';

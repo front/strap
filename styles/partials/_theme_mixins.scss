@@ -1,0 +1,28 @@
+// from Compass 12.1
+// Cross-browser support for @font-face. Supports IE, Gecko, Webkit, Opera.
+// Order of the includes matters, and it is: normal, bold, italic, bold+italic.
+
+@mixin font-face(
+  $name,
+  $font-files,
+  $eot: false,
+  $weight: false,
+  $style: false
+) {
+  $iefont: unquote("#{$eot}?#iefix");
+  @font-face {
+    font-family: quote($name);
+    @if $eot {
+      src: font-url($eot);
+      $font-files: font-url($iefont) unquote("format('eot')"), $font-files;
+    }
+    src: $font-files;
+    @if $weight {
+      font-weight: $weight;
+    }
+    @if $style {
+      font-style: $style;
+    }
+  }
+}
+
