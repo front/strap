@@ -6,6 +6,3 @@ base theme = twitter_bootstrap
 
 ; Styles
 stylesheets[all][] = styles/style.css
-
-; exclude[js][] = 'misc/jquery.js'
-; scripts[] = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
