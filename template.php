@@ -34,12 +34,13 @@
  * Implements hook_js_alter().
  */
 
-function aller_global_theme_js_alter(&$javascript) {
+function strap_js_alter(&$javascript) {
   // Swap out jQuery to use an updated version of the library.
   $javascript['misc/jquery.js']['data'] = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js';
 }
 
-function strap_theme_preprocess(&$vars, $hook) {
+
+function MYTHEME_preprocess(&$vars, $hook) {
 
   // Add template suggestions for page.tpl.php.
   if ($hook == 'page') {
@@ -82,7 +83,7 @@ function strap_theme_preprocess(&$vars, $hook) {
  *
  * Adds classes to <body> based on path.
  */
-function strap_theme_preprocess_html(&$vars) {
+function MYTHEME_preprocess_html(&$vars) {
   // Get the current path and break it into sections.
   $parts = explode('/', drupal_get_path_alias());
 
@@ -123,7 +124,7 @@ function strap_theme_preprocess_html(&$vars) {
  *     <?php print render($region_name); ?>
  *   <?php endif; ?>
  */
-function strap_theme_preprocess_page(&$vars) {
+function MYTHEME_preprocess_page(&$vars) {
   if (module_exists('overlay')) {
     if (overlay_get_mode() == 'child') {
       $vars['in_overlay'] = TRUE;
@@ -144,7 +145,7 @@ function strap_theme_preprocess_page(&$vars) {
  * - Module:        $vars['elements']['#block']->module.
  * - Region:        $vars['elements']['#block']->region.
  */
-function strap_theme_preprocess_block(&$vars, $hook) {
+function MYTHEME_preprocess_block(&$vars, $hook) {
   /**
    * Add classes to blocks created by Views based on views name.
    */
@@ -230,7 +231,7 @@ function strap_theme_preprocess_block(&$vars, $hook) {
  * - View Mode: $vars['view_mode']
  * - Content type: $vars['type']
  */
-function strap_theme_preprocess_node(&$vars) {
+function MYTHEME_preprocess_node(&$vars) {
   // Add classes based on node type.
   switch ($vars['type']) {
     case 'news':
@@ -264,7 +265,7 @@ function strap_theme_preprocess_node(&$vars) {
  * - Content type:  $vars['element']['#bundle'].
  * - View mode:     $vars['element']['#view_mode'].
  */
-function strap_theme_preprocess_field(&$vars,$hook) {
+function MYTHEME_preprocess_field(&$vars,$hook) {
   // add class to a specific fields across content types.
   switch ($vars['element']['#field_name']) {
     case 'body':
@@ -322,7 +323,7 @@ function strap_theme_preprocess_field(&$vars,$hook) {
  * Adds styling classes to views.
  * Adds custom template suggestions.
  */
-function strap_theme_preprocess_views_view(&$vars) {
+function MYTHEME_preprocess_views_view(&$vars) {
   /**
    * Add custom template suggestions to specific views.
    */
@@ -367,7 +368,7 @@ function strap_theme_preprocess_views_view(&$vars) {
  *
  * Shows/hides summary on tiles based on presence of images.
  */
-function strap_theme_preprocess_views_view_fields(&$vars) {
+function MYTHEME_preprocess_views_view_fields(&$vars) {
   if ($vars['view']->name == 'nodequeue_1') {
 
     // Check if we have both an image and a summary
@@ -395,7 +396,7 @@ function strap_theme_preprocess_views_view_fields(&$vars) {
  *
  * Adds classes for styling.
  */
-function strap_theme_preprocess_panels_pane(&$vars) {
+function MYTHEME_preprocess_panels_pane(&$vars) {
   /**
    * Add styling classes to labels/pane-titles for fields as panes.
    */
@@ -452,7 +453,7 @@ function strap_theme_preprocess_panels_pane(&$vars) {
  *
  * Adds classes to all menu wrappers.
  */
-function strap_theme_menu_tree($vars) {
+function MYTHEME_menu_tree($vars) {
   return '<ul class="menu">' . $vars['tree'] . '</ul>';
 }
 
@@ -462,7 +463,7 @@ function strap_theme_menu_tree($vars) {
  *
  * Adds additional wrapper classes for specific menu.
  */
-function strap_theme_menu_tree__MENU_NAME($vars) {
+function MYTHEME_menu_tree__MENU_NAME($vars) {
   return '<ul class="menu vertical-menu">' . $vars['tree'] . '</ul>';
 }
 
@@ -472,14 +473,14 @@ function strap_theme_menu_tree__MENU_NAME($vars) {
  *
  * Adds classes to items on specific form.
  */
-function strap_theme_form_FORMID_alter(&$form) {
+function MYTHEME_form_FORMID_alter(&$form) {
   // Add classes to submit button.
   $form['actions']['submit']['#attributes']['class'][] = 'button';
   $form['actions']['submit']['#attributes']['class'][] = 'submit';
 
   // Add classes to form items base on their type by walking through the form
   // array mapping item types to classes.
-  array_walk($form, 'strap_theme_form_walker', array(
+  array_walk($form, 'MYTHEME_form_walker', array(
     'submit' => array(
       'button',
       'submit',
@@ -497,14 +498,14 @@ function strap_theme_form_FORMID_alter(&$form) {
  *
  * Adds classes to items all forms based on item type.
  */
-function strap_theme_form_alter(&$form, &$form_state, $form_id) {
+function MYTHEME_form_alter(&$form, &$form_state, $form_id) {
   // Add classes to submit button.
   $form['actions']['submit']['#attributes']['class'][] = 'button';
   $form['actions']['submit']['#attributes']['class'][] = 'submit';
 
   // Add classes to form items base on their type by walking through the form
   // array mapping item types to classes.
-  array_walk($form, 'strap_theme_form_walker', array(
+  array_walk($form, 'MYTHEME_form_walker', array(
     'submit' => array(
       'button',
       'submit',
@@ -523,7 +524,7 @@ function strap_theme_form_alter(&$form, &$form_state, $form_id) {
  * @param type $key
  * @param type $map
  */
-function strap_theme_form_walker(&$item, &$key, $map) {
+function MYTHEME_form_walker(&$item, &$key, $map) {
   // If the item is an array and have the "#type" key it has to be a form item.
   if (is_array($item) && isset($item['#type'])) {
     // Check if "map" have the type defined, if not set the default class(es).
@@ -540,7 +541,7 @@ function strap_theme_form_walker(&$item, &$key, $map) {
 
     // If the type is a fieldset walk that to add classes to its form items.
     if ($item['#type'] == 'fieldset') {
-      array_walk($item, 'strap_theme_form_walker');
+      array_walk($item, 'MYTHEME_form_walker');
     }
   }
 }
