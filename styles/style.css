@@ -950,3 +950,7 @@ ul.icons li .icon-large:before {
  *************************************************/
 /*         Forms
  *************************************************/
+#node-edit #edit-title {
+  height: 40px;
+  /* Panopoly fix */
+}
